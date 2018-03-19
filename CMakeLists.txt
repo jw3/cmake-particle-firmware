@@ -13,4 +13,5 @@ set(FIRMWARE_DIR /usr/local/src/particle/firmware)
 
 include(particle)
 
-add_particle_app(src)
+add_particle_app(empty)
+add_particle_app(tinker)
