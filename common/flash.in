@@ -1,0 +1,19 @@
+#!/bin/bash -xe
+
+usb() {
+  local app="$1"
+  local builddir=${BUILD_DIR}
+
+  cd ${FIRMWARE_DIR}
+  echo "make program-dfu $builddir/$app/$app.bin"
+}
+
+cloud() {
+  echd "not implemented"
+}
+
+# flash tinker usb
+
+app=$1
+shift
+"$@" "$app"
