@@ -15,6 +15,7 @@ include(particle)
 
 add_particle_app(empty)
 add_particle_app(tinker)
+add_particle_app(blinker)
 
 set(BUILD_DIR ${CMAKE_BINARY_DIR})
 configure_file(common/flash.in ${CMAKE_BINARY_DIR}/flash)
