@@ -12,6 +12,7 @@ set(GCC_ARM_PATH /usr/local/gcc-arm/bin/)
 set(FIRMWARE_DIR /usr/local/src/particle/firmware)
 
 include(particle)
+include(TinyGpsPlus)
 
 add_particle_app(empty)
 add_particle_app(tinker)
