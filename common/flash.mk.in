@@ -1,0 +1,24 @@
+include ${FIRMWARE_DIR}/build/common-tools.mk
+include ${FIRMWARE_DIR}/build/platform-id.mk
+include ${FIRMWARE_DIR}/modules/${PLATFORM}/modular.mk
+
+PLATFORM_DFU = $(USER_FIRMWARE_IMAGE_LOCATION)
+PLATFORM_DFU_LEAVE = y
+
+all:
+	cp ${name}.bin ${name}.dfu
+	$(DFUSUFFIX) -v $(subst 0x,,$(USBD_VID_SPARK)) -p $(subst 0x,,$(USBD_PID_DFU)) -a ${name}.dfu
+
+ifdef START_DFU_FLASHER_SERIAL_SPEED
+# PARTICLE_SERIAL_DEV should be set something like /dev/tty.usbxxxx and exported
+#ifndef PARTICLE_SERIAL_DEV
+ifeq ("$(wildcard $(PARTICLE_SERIAL_DEV))","")
+	@echo Serial device PARTICLE_SERIAL_DEV : $(PARTICLE_SERIAL_DEV) not available
+else
+	@echo Entering dfu bootloader mode:
+	$(SERIAL_SWITCHER) $(START_DFU_FLASHER_SERIAL_SPEED) $(PARTICLE_SERIAL_DEV)
+	sleep 1
+endif
+endif
+	@echo Flashing ${name}.dfu:
+	$(DFU) -d $(USBD_VID_SPARK):$(USBD_PID_DFU) -a 0 -s $(PLATFORM_DFU)$(if $(PLATFORM_DFU_LEAVE),:leave) -D ${name}.dfu

@@ -10,4 +10,7 @@ function(add_particle_app name)
     add_custom_target(${name} ALL
                       COMMAND make ${MAKE_ARGS}
                       WORKING_DIRECTORY ${FIRMWARE_DIR})
+
+    configure_file(${CMAKE_SOURCE_DIR}/common/flash.mk.in ${CMAKE_BINARY_DIR}/${name}/flash.mk)
+
 endfunction(add_particle_app)
