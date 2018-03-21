@@ -7,7 +7,7 @@ An example of using CMake to build firmware for particle devices.
 
 - https://github.com/particle-iot/firmware/blob/develop/docs/build.md
 - https://github.com/particle-iot/firmware/blob/develop/user/src/application.cpp
-
+- https://gist.github.com/monkbroc/b283bb4da8c10228a61e
 
 ### note
 
