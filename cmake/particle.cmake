@@ -1,3 +1,7 @@
+#
+# copyright 2018 https://github.com/jw3
+#
+
 function(add_particle_app name)
     set(OUTPUT_PREFIX ${CMAKE_BINARY_DIR}/${name})
     set(APP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${name})
