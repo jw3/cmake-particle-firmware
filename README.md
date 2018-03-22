@@ -10,6 +10,7 @@ An example of using CMake to build firmware for particle devices.
 - https://github.com/particle-iot/firmware/blob/develop/user/src/application.cpp
 - https://github.com/particle-iot/firmware/blob/develop/docs/build.md#external_libs
 - https://github.com/particle-iot/firmware/blob/develop/docs/build.md#custom-makefile
+- https://github.com/particle-iot/firmware/tree/v0.6.4/user/tests/libraries/unit-test
 
 ### udev rules
 

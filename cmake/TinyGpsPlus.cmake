@@ -16,5 +16,3 @@ externalproject_get_property(${TINYGPS_ID} source_dir)
 set(${TINYGPS_ID} "${source_dir}")
 
 message(STATUS "[TinyGPS] APPLIBS=${${TINYGPS_ID}}")
-
-
