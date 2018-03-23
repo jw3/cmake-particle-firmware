@@ -4,8 +4,8 @@
 
 function(add_particle_app name)
     set(OUTPUT_PREFIX ${CMAKE_BINARY_DIR}/${name})
-    set(APP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${name})
-    file(RELATIVE_PATH TARGET_DIR ${FIRMWARE_DIR}/main ${CMAKE_CURRENT_BINARY_DIR}/${name})
+    set(APP_DIR ${CMAKE_SOURCE_DIR}/${name})
+    file(RELATIVE_PATH TARGET_DIR ${FIRMWARE_DIR}/main ${CMAKE_BINARY_DIR}/${name})
 
     add_custom_target(${name} ALL
                       DEPENDS ${OUTPUT_PREFIX}/${name}.bin)
