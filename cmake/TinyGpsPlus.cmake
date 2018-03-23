@@ -13,6 +13,6 @@ externalproject_add(
         LOG_DOWNLOAD ON)
 
 externalproject_get_property(${TINYGPS_ID} source_dir)
-set(${TINYGPS_ID} "${source_dir}")
+set(${TINYGPS_ID} "${source_dir}/src")
 
 message(STATUS "[TinyGPS] APPLIBS=${${TINYGPS_ID}}")
