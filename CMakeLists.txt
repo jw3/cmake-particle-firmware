@@ -17,7 +17,7 @@ configure_file(common/flash.in ${CMAKE_BINARY_DIR}/flash)
 include(particle)
 include(TinyGpsPlus)
 
-add_particle_app(empty)
+add_subdirectory(empty)
 add_particle_app(tinker)
 add_particle_app(blinker)
 add_particle_app(tracker TinyGpsPlus)
