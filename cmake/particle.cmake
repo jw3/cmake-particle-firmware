@@ -29,7 +29,7 @@ function(add_particle_app name)
 
     add_custom_command(OUTPUT ${OUTPUT_PREFIX}/${name}.bin
                        COMMAND make
-                       ARGS ${MAKE_ARGS} --include-dir=/usr/local/includexxx
+                       ARGS ${MAKE_ARGS}
                        DEPENDS ${SOURCE_FILES}
                        WORKING_DIRECTORY ${FIRMWARE_DIR}
                        COMMENT "Compile app [${name}] for the ${PLATFORM} platform.")
