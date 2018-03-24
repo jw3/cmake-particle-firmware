@@ -1,1 +1,1 @@
-add_particle_app(empty)
+add_particle_remote_app(empty)
