@@ -1,7 +1,7 @@
 include(arm)
 include(ExternalProject)
 
-set(TinyGpsPlus_Install TinyGpsPlus_Install)
+set(TinyGpsPlus_Install tinygps)
 
 externalproject_add(
         ${TinyGpsPlus_Install}
@@ -14,12 +14,11 @@ externalproject_add(
         LOG_DOWNLOAD ON)
 
 externalproject_get_property(${TinyGpsPlus_Install} source_dir binary_dir)
+
 set(TinyGpsPlus ${source_dir}/src)
-set(TINYGPS_INCLUDE ${source_dir}/src)
+file(GLOB TINYGPS_SOURCE ${source_dir}/src/*.cpp)
+message(STATUS "TinyGPS built in ${binary_dir}")
 
-message(STATUS "${binary_dir}")
-message(STATUS "[TinyGPS] APPLIBS=${TinyGpsPlus}")
-
-add_library(TinyGpsPlus OBJECT ${TinyGpsPlus}/TinyGPS++.cpp)
+add_library(TinyGpsPlus OBJECT ${TINYGPS_SOURCE})
 target_compile_definitions(TinyGpsPlus PRIVATE ${ARM_DEFS})
-add_dependencies(TinyGpsPlus TinyGpsPlus_Install)
+add_dependencies(TinyGpsPlus ${TinyGpsPlus_Install})

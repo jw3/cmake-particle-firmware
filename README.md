@@ -35,3 +35,5 @@ This then uses the build configured flash script in the root of the build direct
 ### note
 
 - targets must be compiled sequentially at this time (ie. `-j1`)
+- patched firmware repository to enabled remote user module here https://github.com/jw3/firmware/tree/0.6.4-user_remote
+- to use nested cmake directories `include(dir/CMakeLists.txt)`, not `add_subdirectory(dir)`
