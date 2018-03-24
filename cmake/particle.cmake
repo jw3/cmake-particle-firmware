@@ -3,6 +3,8 @@
 #
 
 function(add_particle_app name)
+    include(arm)
+
     set(OUTPUT_PREFIX ${CMAKE_BINARY_DIR}/${name})
     set(APP_DIR ${CMAKE_SOURCE_DIR}/${name})
     file(RELATIVE_PATH TARGET_DIR ${FIRMWARE_DIR}/main ${CMAKE_BINARY_DIR}/${name})
@@ -10,16 +12,25 @@ function(add_particle_app name)
     add_custom_target(${name} ALL
                       DEPENDS ${OUTPUT_PREFIX}/${name}.bin)
 
+    file(GLOB CPP_SOURCE ${APP_DIR}/*.cpp)
+
+    set(REMOTE ${name}_remote)
+    add_library(${REMOTE} STATIC ${CPP_SOURCE})
+    target_compile_definitions(${REMOTE} PRIVATE ${ARM_DEFS})
+    add_dependencies(${name} ${REMOTE})
+
     foreach (dep IN LISTS ARGN)
         set(APPLIBS ${APPLIBS} ${${dep}})
-        add_dependencies(${name} ${dep})
+        target_include_directories(${REMOTE} PRIVATE ${${dep}})
+        target_link_libraries(${REMOTE} PRIVATE $<TARGET_OBJECTS:${dep}>)
     endforeach ()
 
     set(MAKE_ARGS
         PLATFORM=${PLATFORM}
         TARGET_DIR=${TARGET_DIR}
         GCC_ARM_PATH=${GCC_ARM_PATH}
-        APPDIR=${APP_DIR})
+        APPDIR=${APP_DIR}
+        USER_REMOTE=${OUTPUT_PREFIX}/CMakeFiles/${REMOTE}.dir)
 
     if (APPLIBS)
         set(MAKE_ARGS ${MAKE_ARGS} APPLIBSV1=${APPLIBS})
