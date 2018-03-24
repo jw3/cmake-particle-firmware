@@ -21,4 +21,6 @@ include(TinyGpsPlus)
 
 include(arm)
 include(empty/CMakeLists.txt)
+add_particle_app(tinker)
+add_particle_app(blinker)
 add_particle_app(tracker TinyGpsPlus)
