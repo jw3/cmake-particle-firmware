@@ -40,12 +40,13 @@ endfunction(add_particle_app)
 
 function(add_particle_remote_app name)
     include(arm)
+    set(OUTPUT_PREFIX ${CMAKE_BINARY_DIR}/${name})
 
     set(APP_DIR ${CMAKE_SOURCE_DIR}/${name})
     file(RELATIVE_PATH TARGET_DIR ${FIRMWARE_DIR}/main ${CMAKE_BINARY_DIR}/${name})
 
     add_custom_target(${name} ALL
-                      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${name}.bin)
+                      DEPENDS ${OUTPUT_PREFIX}/${name}.bin)
 
     file(GLOB SOURCE_FILES ${APP_DIR}/*.cpp)
 
@@ -73,9 +74,10 @@ function(add_particle_remote_app name)
         PLATFORM=${PLATFORM}
         TARGET_DIR=${TARGET_DIR}
         GCC_ARM_PATH=${GCC_ARM_PATH}
-        USER_REMOTE=${CMAKE_BINARY_DIR})
+        USER_REMOTE=${CMAKE_BINARY_DIR}
+        TARGET_BASE=${OUTPUT_PREFIX}/${name})
 
-    add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${name}.bin
+    add_custom_command(OUTPUT ${OUTPUT_PREFIX}/${name}.bin
                        COMMAND make
                        ARGS ${MAKE_ARGS}
                        DEPENDS ${SOURCE_FILES}
