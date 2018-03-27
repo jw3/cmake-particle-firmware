@@ -58,7 +58,6 @@ function(add_particle_remote_app name)
     message(STATUS "Configuring [${name}] remote at ${USER_REMOTE}")
 
     foreach (dep IN LISTS ARGN)
-        set(APPLIBS ${APPLIBS} ${${dep}})
         message(STATUS "${name} include ${dep} at ${${dep}}")
         target_include_directories(${REMOTE_TARGET} PRIVATE ${${dep}})
         target_link_libraries(${REMOTE_TARGET} PRIVATE $<TARGET_OBJECTS:${dep}>)
@@ -74,12 +73,7 @@ function(add_particle_remote_app name)
         PLATFORM=${PLATFORM}
         TARGET_DIR=${TARGET_DIR}
         GCC_ARM_PATH=${GCC_ARM_PATH}
-        APPDIR=${APP_DIR}
         USER_REMOTE=${CMAKE_BINARY_DIR})
-
-    if (APPLIBS)
-        set(MAKE_ARGS ${MAKE_ARGS} APPLIBSV1=${APPLIBS})
-    endif ()
 
     add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${name}.bin
                        COMMAND make
