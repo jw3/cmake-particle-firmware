@@ -59,12 +59,14 @@ function(add_particle_remote_app name)
 
     foreach (dep IN LISTS ARGN)
         set(APPLIBS ${APPLIBS} ${${dep}})
+        message(STATUS "${name} include ${dep} at ${${dep}}")
         target_include_directories(${REMOTE_TARGET} PRIVATE ${${dep}})
         target_link_libraries(${REMOTE_TARGET} PRIVATE $<TARGET_OBJECTS:${dep}>)
         add_dependencies(${REMOTE_TARGET} ${dep})
         add_custom_command(TARGET ${name}
                            POST_BUILD
-                           COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_OBJECTS:${dep}> ${CMAKE_BINARY_DIR})
+                           COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_OBJECTS:${dep}> ${CMAKE_BINARY_DIR}
+                           COMMENT "Copy ${dep} object file $<TARGET_OBJECTS:${dep}> to ${CMAKE_BINARY_DIR} to be included in Remote User Module.")
     endforeach ()
 
 
@@ -84,7 +86,7 @@ function(add_particle_remote_app name)
                        ARGS ${MAKE_ARGS}
                        DEPENDS ${SOURCE_FILES}
                        WORKING_DIRECTORY ${FIRMWARE_DIR}
-                       COMMENT "Compile app [${name}] for the ${PLATFORM} platform.")
+                       COMMENT "Compile [${name}] as a Remote User Module for the ${PLATFORM} platform.")
 
     add_custom_command(TARGET ${name}
                        POST_BUILD
