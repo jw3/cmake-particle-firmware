@@ -18,9 +18,11 @@ configure_file(common/flash.in ${CMAKE_BINARY_DIR}/flash)
 
 include(particle)
 include(TinyGpsPlus)
+include(DS18B20)
 
 include(arm)
 include(empty/CMakeLists.txt)
 add_particle_remote_app(tinker)
 add_particle_remote_app(blinker)
 add_particle_remote_app(tracker TinyGpsPlus)
+add_particle_remote_app(thermometer OneWire DS18B20)
