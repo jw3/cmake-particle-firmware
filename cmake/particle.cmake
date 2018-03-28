@@ -74,8 +74,10 @@ function(add_particle_remote_app name)
         PLATFORM=${PLATFORM}
         TARGET_DIR=${TARGET_DIR}
         GCC_ARM_PATH=${GCC_ARM_PATH}
-        USER_REMOTE=${CMAKE_BINARY_DIR}
-        TARGET_BASE=${OUTPUT_PREFIX}/${name})
+        TARGET_DIR=${OUTPUT_PREFIX}
+        TARGET_FILE=${name}
+        USER_BUILD_DIR=${name}
+        USER_REMOTE=${USER_REMOTE})
 
     add_custom_command(OUTPUT ${OUTPUT_PREFIX}/${name}.bin
                        COMMAND make
