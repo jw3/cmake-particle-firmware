@@ -1,0 +1,21 @@
+From 868d03cc1f9957e5fd637984cc20a7e6644f0ce6 Mon Sep 17 00:00:00 2001
+From: John Wass <wassj@ctc.com>
+Date: Wed, 28 Mar 2018 06:53:53 -0400
+Subject: [PATCH] include cmath
+
+---
+ firmware/spark-dallas-temperature.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/firmware/spark-dallas-temperature.cpp b/firmware/spark-dallas-temperature.cpp
+index 9091c13..8d076c8 100644
+--- a/firmware/spark-dallas-temperature.cpp
++++ b/firmware/spark-dallas-temperature.cpp
+@@ -1,3 +1,4 @@
++#include <cmath>
+ // This library is free software; you can redistribute it and/or
+ // modify it under the terms of the GNU Lesser General Public
+ // License as published by the Free Software Foundation; either
+-- 
+2.7.4
+

@@ -8,6 +8,7 @@ externalproject_add(
         ${DS18B20_Install}
         GIT_REPOSITORY https://github.com/tomdeboer/SparkCoreDallasTemperature.git
         GIT_TAG master
+        PATCH_COMMAND ${CMAKE_SOURCE_DIR}/patches/apply.sh DS18B20
         CONFIGURE_COMMAND ""
         BUILD_COMMAND ""
         INSTALL_COMMAND ""
