@@ -3,6 +3,15 @@ Example CMake Cross Compile Particle Firmware
 
 An example of using CMake to build firmware for particle devices.
 
+### goals
+
+- use cmake to build firmware
+- use clion as an ide
+- support third party library integration
+- do not install the particle cli
+- be simple to setup and use
+- dont brick my boards
+
 ### hacking references
 
 - https://github.com/particle-iot/firmware/blob/develop/docs/build.md
@@ -55,3 +64,7 @@ This then uses the build configured flash script in the root of the build direct
 - targets must be compiled sequentially at this time (ie. `-j1`)
 - patched firmware repository to enabled remote user module here https://github.com/jw3/firmware/tree/0.6.4-user_remote
 - to use nested cmake directories `include(dir/CMakeLists.txt)`, not `add_subdirectory(dir)`
+
+### related
+
+- https://github.com/jw3/stegratxr-dancer
