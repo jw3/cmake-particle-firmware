@@ -54,7 +54,7 @@ function(add_particle_remote_app name)
     set(USER_REMOTE ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/${REMOTE_TARGET}.dir/${name})
     add_library(${REMOTE_TARGET} STATIC ${SOURCE_FILES})
     target_compile_options(${REMOTE_TARGET} PRIVATE "$<$<CONFIG:ALL>:${PLATFORM_CXX_FLAGS}>")
-    target_include_directories(${REMOTE_TARGET} PRIVATE ${PLATFORM_CXX_INCLUDES})
+    target_include_directories(${REMOTE_TARGET} PRIVATE ${APP_DIR} ${PLATFORM_CXX_INCLUDES})
     target_compile_definitions(${REMOTE_TARGET} PRIVATE ${PLATFORM_CXX_DEFS})
     add_dependencies(${name} ${REMOTE_TARGET})
 
