@@ -1,6 +1,4 @@
-include(arm)
 include(ExternalProject)
-
 set(OneWire_Install onewire)
 
 externalproject_add(
@@ -17,6 +15,7 @@ externalproject_get_property(${OneWire_Install} source_dir)
 set(OneWire ${source_dir}/src)
 
 add_library(OneWire OBJECT ${OneWire}/OneWire.cpp)
-target_include_directories(OneWire PRIVATE ${OneWire})
-target_compile_definitions(OneWire PRIVATE ${ARM_DEFS} SPARK)
+target_include_directories(OneWire PRIVATE ${OneWire} ${PLATFORM_CXX_INCLUDES})
+target_compile_options(TinyGpsPlus PRIVATE "$<$<CONFIG:ALL>:${PLATFORM_CXX_FLAGS}>")
+target_compile_definitions(OneWire PRIVATE ${PLATFORM_CXX_DEFS})
 add_dependencies(OneWire ${OneWire_Install})

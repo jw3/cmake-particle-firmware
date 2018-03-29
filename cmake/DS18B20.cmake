@@ -1,8 +1,7 @@
-include(arm)
 include(ExternalProject)
-include(OneWire)
-
 set(DS18B20_Install ds18b20)
+
+include(OneWire)
 
 externalproject_add(
         ${DS18B20_Install}
@@ -19,6 +18,7 @@ externalproject_get_property(${DS18B20_Install} source_dir binary_dir)
 set(DS18B20 ${source_dir}/firmware)
 
 add_library(DS18B20 OBJECT ${DS18B20}/spark-dallas-temperature.cpp)
-target_include_directories(DS18B20 PRIVATE ${DS18B20} ${OneWire})
-target_compile_definitions(DS18B20 PRIVATE ${ARM_DEFS} SPARK)
+target_include_directories(DS18B20 PRIVATE ${DS18B20} ${OneWire} ${PLATFORM_CXX_INCLUDES})
+target_compile_options(TinyGpsPlus PRIVATE "$<$<CONFIG:ALL>:${PLATFORM_CXX_FLAGS}>")
+target_compile_definitions(DS18B20 PRIVATE ${PLATFORM_CXX_DEFS})
 add_dependencies(DS18B20 ${DS18B20_Install} OneWire)
