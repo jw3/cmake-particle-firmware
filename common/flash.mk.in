@@ -2,10 +2,9 @@ include ${FIRMWARE_DIR}/build/common-tools.mk
 include ${FIRMWARE_DIR}/build/platform-id.mk
 include ${FIRMWARE_DIR}/modules/${PLATFORM}/modular.mk
 
-PYTHONPATH = /usr/bin/python3.5
 SERIAL_SWITCHER = ${FIRMWARE_DIR}/build/serial_switcher.py
 PARTICLE_SERIAL_DEV = /dev/ttyACM0
-START_DFU_FLASHER_SERIAL_SPEED = 19200
+START_DFU_FLASHER_SERIAL_SPEED = 14400
 PLATFORM_DFU = $(USER_FIRMWARE_IMAGE_LOCATION)
 PLATFORM_DFU_LEAVE = y
 
