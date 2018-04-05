@@ -65,10 +65,10 @@ function(add_particle_remote_app name)
         target_include_directories(${REMOTE_TARGET} PRIVATE ${${dep}})
         target_link_libraries(${REMOTE_TARGET} PRIVATE $<TARGET_OBJECTS:${dep}>)
         add_dependencies(${REMOTE_TARGET} ${dep})
-        add_custom_command(TARGET ${name}
+        add_custom_command(TARGET ${REMOTE_TARGET}
                            POST_BUILD
-                           COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_OBJECTS:${dep}> ${CMAKE_BINARY_DIR}
-                           COMMENT "Copy ${dep} object file $<TARGET_OBJECTS:${dep}> to ${CMAKE_BINARY_DIR} to be included in Remote User Module.")
+                           COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_OBJECTS:${dep}> ${USER_REMOTE}
+                           COMMENT "Copy ${dep} object file $<TARGET_OBJECTS:${dep}> to ${name} remote ${USER_REMOTE}.")
     endforeach ()
 
 
@@ -87,11 +87,6 @@ function(add_particle_remote_app name)
                        DEPENDS ${SOURCE_FILES}
                        WORKING_DIRECTORY ${FIRMWARE_DIR}
                        COMMENT "Compile [${name}] as a Remote User Module for the ${PLATFORM} platform.")
-
-    add_custom_command(TARGET ${name}
-                       POST_BUILD
-                       COMMAND cp ${USER_REMOTE}/*.o ${CMAKE_BINARY_DIR}
-                       COMMENT "copying ${name} objs to root binary dir")
 
     configure_file(${CMAKE_SOURCE_DIR}/common/flash.mk.in ${CMAKE_BINARY_DIR}/${name}/flash.mk)
 
