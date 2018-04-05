@@ -16,6 +16,6 @@ set(OneWire ${source_dir}/src)
 
 add_library(OneWire OBJECT ${OneWire}/OneWire.cpp)
 target_include_directories(OneWire PRIVATE ${OneWire} ${PLATFORM_CXX_INCLUDES})
-target_compile_options(TinyGpsPlus PRIVATE "$<$<CONFIG:ALL>:${PLATFORM_CXX_FLAGS}>")
+target_compile_options(OneWire PRIVATE "$<$<CONFIG:ALL>:${PLATFORM_CXX_FLAGS}>")
 target_compile_definitions(OneWire PRIVATE ${PLATFORM_CXX_DEFS})
 add_dependencies(OneWire ${OneWire_Install})
