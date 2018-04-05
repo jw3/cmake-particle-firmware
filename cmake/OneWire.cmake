@@ -14,6 +14,8 @@ externalproject_add(
 externalproject_get_property(${OneWire_Install} source_dir)
 set(OneWire ${source_dir}/src)
 
+file(WRITE ${OneWire}/OneWire.cpp)
+
 add_library(OneWire OBJECT ${OneWire}/OneWire.cpp)
 target_include_directories(OneWire PRIVATE ${OneWire} ${PLATFORM_CXX_INCLUDES})
 target_compile_options(OneWire PRIVATE "$<$<CONFIG:ALL>:${PLATFORM_CXX_FLAGS}>")

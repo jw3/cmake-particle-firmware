@@ -14,6 +14,8 @@ externalproject_add(
 externalproject_get_property(${TinyGpsPlus_Install} source_dir binary_dir)
 set(TinyGpsPlus ${source_dir}/firmware)
 
+file(WRITE ${TinyGpsPlus}/TinyGPS++.cpp)
+
 add_library(TinyGpsPlus OBJECT ${TinyGpsPlus}/TinyGPS++.cpp)
 target_include_directories(TinyGpsPlus PRIVATE ${TinyGpsPlus} ${PLATFORM_CXX_INCLUDES})
 target_compile_options(TinyGpsPlus PRIVATE "$<$<CONFIG:ALL>:${PLATFORM_CXX_FLAGS}>")
