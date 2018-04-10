@@ -17,9 +17,12 @@ externalproject_add(
 externalproject_get_property(${DS18B20_Install} source_dir)
 set(DS18B20 ${source_dir}/firmware)
 
-file(WRITE ${DS18B20}/spark-dallas-temperature.cpp)
+set(SOURCE_FILES ${DS18B20}/spark-dallas-temperature.cpp)
+if (NOT EXISTS ${SOURCE_FILES})
+    file(WRITE ${SOURCE_FILES})
+endif ()
 
-add_library(DS18B20 OBJECT ${DS18B20}/spark-dallas-temperature.cpp)
+add_library(DS18B20 OBJECT ${SOURCE_FILES})
 target_include_directories(DS18B20 PRIVATE ${DS18B20} ${OneWire} ${PLATFORM_CXX_INCLUDES})
 target_compile_options(DS18B20 PRIVATE "$<$<CONFIG:ALL>:${PLATFORM_CXX_FLAGS}>")
 target_compile_definitions(DS18B20 PRIVATE ${PLATFORM_CXX_DEFS})
