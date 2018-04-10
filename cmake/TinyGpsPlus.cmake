@@ -11,7 +11,7 @@ externalproject_add(
         UPDATE_COMMAND ""
         LOG_DOWNLOAD ON)
 
-externalproject_get_property(${TinyGpsPlus_Install} source_dir binary_dir)
+externalproject_get_property(${TinyGpsPlus_Install} source_dir)
 set(TinyGpsPlus ${source_dir}/firmware)
 
 file(WRITE ${TinyGpsPlus}/TinyGPS++.cpp)

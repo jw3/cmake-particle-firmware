@@ -14,7 +14,7 @@ externalproject_add(
         UPDATE_COMMAND ""
         LOG_DOWNLOAD ON)
 
-externalproject_get_property(${DS18B20_Install} source_dir binary_dir)
+externalproject_get_property(${DS18B20_Install} source_dir)
 set(DS18B20 ${source_dir}/firmware)
 
 file(WRITE ${DS18B20}/spark-dallas-temperature.cpp)
