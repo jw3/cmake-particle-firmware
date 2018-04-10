@@ -10,12 +10,12 @@ reading the battery level, and manually requesting a GPS reading.
 #include <application.h>
 #include <TinyGPS++.h>
 
-#include <sstream>
-
-long lastPublish = 0;
-int delayMinutes = 10;
+long last = 0;
+int delays = 1;
 
 TinyGPSPlus gps;
+
+int min2mill(int min);
 
 void setup() {
    Serial.begin(9600);
@@ -26,13 +26,17 @@ void loop() {
       for(auto c = Serial.readString().c_str(); c; ++c)
          gps.encode(*c);
 
-   if(millis() - lastPublish > delayMinutes * 60 * 1000) {
+   if(millis() - last > min2mill(delays)) {
       auto location = gps.location;
-      if(location.isValid() & location.isUpdated()) {
+      if(location.isValid() && location.isUpdated()) {
          auto str = String::format("%d:%d", location.lat(), location.lng());
-         Particle.publish("G", str, 60, PRIVATE);
+         Particle.publish("pos", str, 60, PRIVATE);
       }
 
-      lastPublish = millis();
+      last = millis();
    }
+}
+
+int min2mill(int min) {
+   return 1000 * 60 * min;
 }
