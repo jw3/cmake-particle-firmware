@@ -11,9 +11,12 @@ set(GCC_ARM_PATH /usr/local/gcc-arm/bin/)
 set(FIRMWARE_DIR /usr/local/src/particle/firmware)
 
 if (NOT PLATFORM)
+    message(WARNING "defaulting to photon platform, specify with PLATFORM")
     set(PLATFORM photon)
 endif ()
-message(STATUS "Building firmware for the ${PLATFORM} platform.")
+message("
+=============================== Configuring firmware for the -=-= ${PLATFORM} =-=- ===============================
+")
 include(${PLATFORM})
 
 configure_file(common/flash.in ${CMAKE_BINARY_DIR}/flash)
