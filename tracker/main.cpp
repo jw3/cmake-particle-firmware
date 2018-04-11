@@ -30,7 +30,10 @@ void loop() {
       auto location = gps.location;
       if(location.isValid() && location.isUpdated()) {
          auto str = String::format("%d:%d", location.lat(), location.lng());
-         Particle.publish("pos", str, 60, PRIVATE);
+         Particle.publish("pos", str, PRIVATE);
+      }
+      else {
+         Particle.publish("err", "invalid location", PRIVATE);
       }
 
       last = millis();
