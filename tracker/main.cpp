@@ -18,13 +18,16 @@ TinyGPSPlus gps;
 int min2mill(int min);
 
 void setup() {
-   Serial.begin(9600);
+   Serial1.begin(9600);
+   Particle.publish("ready", PRIVATE);
 }
 
 void loop() {
-   if(Serial.available())
-      for(auto c = Serial.readString().c_str(); c; ++c)
-         gps.encode(*c);
+   if(Serial1.available()) {
+      auto str = Serial1.readStringUntil('\n');
+      for(int i = 0; i < str.length(); ++i)
+         gps << str.charAt(i);
+   }
 
    if(millis() - last > min2mill(delays)) {
       auto location = gps.location;
