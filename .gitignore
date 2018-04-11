@@ -2,6 +2,7 @@
 *.iml
 
 build
+build-*
 cmake-build-*
 
 target
