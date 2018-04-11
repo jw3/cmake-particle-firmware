@@ -43,6 +43,18 @@ Add the particle rules from https://docs.particle.io/assets/files/50-particle.ru
 
 - https://gist.github.com/monkbroc/b283bb4da8c10228a61e
 
+### building
+
+The `build.sh` script requires a single parameter that identifies the platform
+
+`build.sh photon`
+
+Only `photon` or `electron` are acceptable values.
+
+An additional parameter can be passed to perform a quick build (dont delete previous compilation)
+
+'build.sh photon quick'
+
 ### flashing
 
 Do so at your own risk!
@@ -59,12 +71,25 @@ If running from the flash script in the root of the source dir you must provide 
 
 This then uses the build configured flash script in the root of the build directory.
 
-### note
+The flasher script is setup to use auto dfu mode.  Its hardcoded as this for now
 
+```
+PARTICLE_SERIAL_DEV = /dev/ttyACM0
+START_DFU_FLASHER_SERIAL_SPEED = 14400
+```
+
+### notes
+
+- successfully flashed both photon and electron with multiple firmwares
+  - sanity checked round trips after flashing using the tinker mobile app
 - targets must be compiled sequentially at this time (ie. `-j1`)
-- patched firmware repository to enabled remote user module here https://github.com/jw3/firmware/tree/0.6.4-user_remote
-- to use nested cmake directories `include(dir/CMakeLists.txt)`, not `add_subdirectory(dir)`
+- patched firmware repository to enabled remote user module
+  - https://github.com/jw3/firmware/tree/0.6.4-user_remote
+- to use nested cmake directories use include
+  - do `include(dir/CMakeLists.txt)`
+  - dont `add_subdirectory(dir)`
 
-### related
+### related works
 
 - https://github.com/jw3/stegratxr-dancer
+- https://github.com/jw3/firmware/tree/0.6.4-user_remote
