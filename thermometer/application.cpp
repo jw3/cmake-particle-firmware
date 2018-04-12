@@ -1,31 +1,29 @@
 #include <OneWire.h>
 #include <spark-dallas-temperature.h>
 
-// Data wire is plugged into port 2 on the Arduino
-#define ONE_WIRE_BUS 2
+long last = 0;
+int delays = 1;
 
-// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
-OneWire oneWire(ONE_WIRE_BUS);
-
-// Pass our oneWire reference to Dallas Temperature.
+OneWire oneWire(D0);
 DallasTemperature sensors(&oneWire);
 
-void setup(void) {
-   // start serial port
-   Serial.begin(9600);
-   Serial.println("Dallas Temperature IC Control Library Demo");
+int min2mill(int min);
 
-   // Start up the library
+void setup(void) {
    sensors.begin();
+   Particle.publish("ready", PRIVATE);
 }
 
 void loop(void) {
-   // call sensors.requestTemperatures() to issue a global temperature
-   // request to all devices on the bus
-   Serial.print("Requesting temperatures...");
-   sensors.requestTemperatures(); // Send the command to get temperatures
-   Serial.println("DONE");
+   if(millis() - last > min2mill(delays)) {
+      sensors.requestTemperatures();
+      String s(sensors.getTempCByIndex(0));
+      Particle.publish("temp", s, PRIVATE);
 
-   Serial.print("Temperature for the device 1 (index 0) is: ");
-   Serial.println(sensors.getTempCByIndex(0));
+      last = millis();
+   }
+}
+
+int min2mill(int min) {
+   return 1000 * 60 * min;
 }
