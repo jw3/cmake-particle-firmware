@@ -1,12 +1,3 @@
-/* -----------------------------------------------------------
-This example shows a lot of different features. As configured here
-it will check for a good GPS fix every 10 minutes and publish that data
-if there is one. If not, it will save you data by staying quiet. It also
-registers 3 Particle.functions for changing whether it publishes,
-reading the battery level, and manually requesting a GPS reading.
----------------------------------------------------------------*/
-
-// Getting the library
 #include <application.h>
 #include <TinyGPS++.h>
 
@@ -32,13 +23,12 @@ void loop() {
    if(millis() - last > min2mill(delays)) {
       auto location = gps.location;
       if(location.isValid() && location.isUpdated()) {
-         auto str = String::format("%d:%d", location.lat(), location.lng());
+         auto lat = String(location.lat(), 6);
+         auto lon = String(location.lng(), 6);
+         auto str = String::format("%s:%s", lat.c_str(), lon.c_str());
+
          Particle.publish("pos", str, PRIVATE);
       }
-      else {
-         Particle.publish("err", "invalid location", PRIVATE);
-      }
-
       last = millis();
    }
 }
