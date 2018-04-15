@@ -4,10 +4,10 @@
 long last = 0;
 int delays = 1;
 
-OneWire oneWire(D0);
+OneWire oneWire(D4);
 DallasTemperature sensors(&oneWire);
 
-int min2mill(int min);
+int sec2mill(int min);
 
 void setup(void) {
    sensors.begin();
@@ -15,15 +15,15 @@ void setup(void) {
 }
 
 void loop(void) {
-   if(millis() - last > min2mill(delays)) {
+   if(millis() - last > sec2mill(delays)) {
       sensors.requestTemperatures();
-      String s(sensors.getTempCByIndex(0));
+      String s(sensors.getTempFByIndex(0));
       Particle.publish("temp", s, PRIVATE);
 
       last = millis();
    }
 }
 
-int min2mill(int min) {
-   return 1000 * 60 * min;
+int sec2mill(int min) {
+   return 1000 * min;
 }
