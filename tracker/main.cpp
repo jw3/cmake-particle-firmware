@@ -1,12 +1,10 @@
 #include <application.h>
 #include <TinyGPS++.h>
 
-long last = 0;
-int delays = 1;
+long lastEvent = 0;
+int eventInterval = 5 * 1000;
 
 TinyGPSPlus gps;
-
-int min2mill(int min);
 
 void setup() {
    Serial1.begin(9600);
@@ -20,7 +18,7 @@ void loop() {
          gps << str.charAt(i);
    }
 
-   if(millis() - last > min2mill(delays)) {
+   if(millis() - lastEvent > eventInterval) {
       auto location = gps.location;
       if(location.isValid() && location.isUpdated()) {
          auto lat = String(location.lat(), 6);
@@ -29,10 +27,6 @@ void loop() {
 
          Particle.publish("pos", str, PRIVATE);
       }
-      last = millis();
+      lastEvent = millis();
    }
-}
-
-int min2mill(int min) {
-   return 1000 * 60 * min;
 }

@@ -1,13 +1,11 @@
 #include <OneWire.h>
 #include <spark-dallas-temperature.h>
 
-long last = 0;
-int delays = 1;
+long lastEvent = 0;
+int eventInterval = 5 * 1000;
 
 OneWire oneWire(D4);
 DallasTemperature sensors(&oneWire);
-
-int sec2mill(int min);
 
 void setup(void) {
    sensors.begin();
@@ -15,15 +13,11 @@ void setup(void) {
 }
 
 void loop(void) {
-   if(millis() - last > sec2mill(delays)) {
+   if(millis() - lastEvent > eventInterval) {
       sensors.requestTemperatures();
       String s(sensors.getTempFByIndex(0));
       Particle.publish("temp", s, PRIVATE);
 
-      last = millis();
+      lastEvent = millis();
    }
-}
-
-int sec2mill(int min) {
-   return 1000 * min;
 }
