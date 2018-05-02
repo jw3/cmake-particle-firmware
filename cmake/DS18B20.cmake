@@ -22,7 +22,7 @@ if (NOT EXISTS ${SOURCE_FILES})
     file(WRITE ${SOURCE_FILES})
 endif ()
 
-add_library(DS18B20 OBJECT ${SOURCE_FILES})
+add_library(DS18B20 STATIC ${SOURCE_FILES})
 target_include_directories(DS18B20 PRIVATE ${DS18B20} ${OneWire} ${PLATFORM_CXX_INCLUDES})
 target_compile_options(DS18B20 PRIVATE "$<$<CONFIG:ALL>:${PLATFORM_CXX_FLAGS}>")
 target_compile_definitions(DS18B20 PRIVATE ${PLATFORM_CXX_DEFS})

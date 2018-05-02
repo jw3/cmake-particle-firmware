@@ -19,7 +19,7 @@ if (NOT EXISTS ${SOURCE_FILES})
     file(WRITE ${SOURCE_FILES})
 endif ()
 
-add_library(OneWire OBJECT ${SOURCE_FILES})
+add_library(OneWire STATIC ${SOURCE_FILES})
 target_include_directories(OneWire PRIVATE ${OneWire} ${PLATFORM_CXX_INCLUDES})
 target_compile_options(OneWire PRIVATE "$<$<CONFIG:ALL>:${PLATFORM_CXX_FLAGS}>")
 target_compile_definitions(OneWire PRIVATE ${PLATFORM_CXX_DEFS})
