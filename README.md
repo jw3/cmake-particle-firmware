@@ -107,3 +107,7 @@ Add the particle rules from https://docs.particle.io/assets/files/50-particle.ru
 
 - https://github.com/jw3/stegratxr-dancer
 - https://github.com/jw3/firmware/tree/0.6.4-user_remote
+
+
+### credits
+- tracker2 is an example from [NeoGPS](https://github.com/SlashDevin/NeoGPS)
