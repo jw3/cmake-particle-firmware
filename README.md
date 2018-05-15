@@ -92,6 +92,22 @@ Add the particle rules from https://docs.particle.io/assets/files/50-particle.ru
 
 - https://gist.github.com/monkbroc/b283bb4da8c10228a61e
 
+### system firmware updates
+
+currently using manual process described [here](https://docs.particle.io/support/troubleshooting/firmware-upgrades/electron/#manual-firmware-update), including downloading the firmware binaries from the github releases.
+
+going into safe mode immediately after establishing connection is a symptom of mismatched firmware.
+
+#### steps
+1. enter DFU mode
+2. `dfu-util -d 2b04:d00a -a 0 -s 0x8060000 -D system-part1-x.y.z-electron.bin`
+3. `dfu-util -d 2b04:d00a -a 0 -s 0x8020000 -D system-part2-x.y.z-electron.bin`
+4. `dfu-util -d 2b04:d00a -a 0 -s 0x8040000:leave -D system-part3-x.y.z-electron.bin`
+
+missing the `:leave` modifier on the last step will cause the device to remain in DFU mode, resetting manually will work
+
+the only firmware that I have patched with remote user compilation is the `0.6.4` release.
+
 ### notes
 
 - successfully flashed both photon and electron with multiple firmwares
