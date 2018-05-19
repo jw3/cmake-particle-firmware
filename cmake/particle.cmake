@@ -61,15 +61,20 @@ function(add_particle_remote_app name)
     message(STATUS "Configuring [${name}] remote at ${USER_REMOTE}")
 
     foreach (dep IN LISTS ARGN)
-        message(STATUS "${name} include ${dep} at ${${dep}}")
-        target_include_directories(${REMOTE_TARGET} PRIVATE ${${dep}})
-        target_link_libraries(${REMOTE_TARGET} PRIVATE lib${dep})
-        add_dependencies(${REMOTE_TARGET} ${dep})
-        add_custom_command(TARGET ${REMOTE_TARGET}
-                           POST_BUILD
-                           WORKING_DIRECTORY ${USER_REMOTE}
-                           COMMAND ar -xv ${CMAKE_CURRENT_BINARY_DIR}/lib${dep}.a
-                           COMMENT "Explode lib${dep}.a into ${name} remote.")
+        if (DEFINED ${dep})
+            message(STATUS "${name} include ${dep} at ${${dep}}")
+            target_include_directories(${REMOTE_TARGET} PRIVATE ${${dep}})
+            target_link_libraries(${REMOTE_TARGET} PRIVATE lib${dep})
+            add_dependencies(${REMOTE_TARGET} ${dep})
+            add_custom_command(TARGET ${REMOTE_TARGET}
+                               POST_BUILD
+                               WORKING_DIRECTORY ${USER_REMOTE}
+                               COMMAND ar -xv ${CMAKE_CURRENT_BINARY_DIR}/lib${dep}.a
+                               COMMENT "Explode lib${dep}.a into ${name} remote.")
+        else ()
+            include(${dep})
+            visit(${REMOTE_TARGET})
+        endif ()
     endforeach ()
 
 
