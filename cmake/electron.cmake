@@ -66,6 +66,7 @@ set(PLATFORM_CXX_DEFS
 
 set(PLATFORM_CXX_INCLUDES
     ${FIRMWARE_DIR}/user/inc
+    ${FIRMWARE_DIR}/user/libraries
     ${FIRMWARE_DIR}/wiring/inc
     ${FIRMWARE_DIR}/system/inc
     ${FIRMWARE_DIR}/services/inc
