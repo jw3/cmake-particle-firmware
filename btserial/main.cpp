@@ -22,6 +22,8 @@ unsigned long lastPublish = 0;
 unsigned long startFix = 0;
 bool gettingFix = false;
 
+static uint8_t externalANT[]={0xB5,0x62,0x06,0x13,0x04,0x00,0x01,0x00,0xF0,0x7D,0x8B,0x2E};
+
 void setup()
 {
    Serial5.begin(9600);
@@ -34,12 +36,18 @@ void setup()
    digitalWrite(D6, LOW);
    startFix = millis();
    gettingFix = true;
+
+   for(auto b : externalANT) {
+      Serial1.write(b);
+   }
 }
 
 void loop()
 {
    while (Serial1.available() > 0) {
-      if (gps.encode(Serial1.read())) {
+      auto v = Serial1.read();
+      Serial5.write(v);
+      if (gps.encode(v)) {
          displayInfo();
       }
    }
@@ -67,7 +75,6 @@ void displayInfo()
             startFix = millis();
          }
       }
-      Serial5.println(buf);
 
       if (Particle.connected()) {
          if (millis() - lastPublish >= PUBLISH_PERIOD) {
