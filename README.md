@@ -93,6 +93,19 @@ Add the particle rules from https://docs.particle.io/assets/files/50-particle.ru
   - the firmware was built with different gcc than is being used to compile the app
   - ran into this switching between 4.9 and 5.3
 
+#### using elsewhere
+
+Include the three main components
+
+```
+include(${PLATFORM})
+include(particle)
+include(flasher)
+```
+
+At this time there is no convenient way of obtaining the files these includes require.  Eventually there will be a conan package that provides all of this.
+
+Also this project will be progressing at some undefinable rate, https://github.com/jw3/particle-cmakes
 
 ### downloads
 - [gcc arm 4.9](https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2)
