@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+curl https://github.com/particle-iot/firmware/releases/download/v0.6.4/system-part1-0.6.4-electron.bin
