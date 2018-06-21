@@ -3,7 +3,6 @@
 #
 
 function(add_particle_remote_app name)
-    include(${PLATFORM})
     set(OUTPUT_PREFIX ${CMAKE_BINARY_DIR}/${name})
 
     set(APP_DIR ${CMAKE_SOURCE_DIR}/${name})
