@@ -21,10 +21,9 @@ message("
 =============================== Configuring firmware for the -=-= ${PLATFORM} =-=- ===============================
 ")
 include(${PLATFORM})
-
-configure_file(common/flash.in ${CMAKE_BINARY_DIR}/flash)
-
 include(particle)
+include(flasher)
+
 include(TinyGpsPlus)
 include(DS18B20)
 include(LiquidCrystalI2C)
