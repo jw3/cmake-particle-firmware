@@ -17,9 +17,6 @@ elseif (NOT PLATFORM MATCHES "^photon$|^electron$")
     message(FATAL_ERROR "invalid platform [${PLATFORM}] (choose 'photon' or 'electron')")
 endif ()
 
-message("
-=============================== Configuring firmware for the -=-= ${PLATFORM} =-=- ===============================
-")
 include(${PLATFORM})
 include(particle)
 include(flasher)

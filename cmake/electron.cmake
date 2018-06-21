@@ -1,3 +1,5 @@
+message("\n=============================== Configuring firmware for the -=-= ${PLATFORM} =-=- ===============================\n")
+
 set(CMAKE_CXX_COMPILER "${GCC_ARM_PATH}/arm-none-eabi-g++")
 
 set(PLATFORM_CXX_FLAGS
