@@ -88,6 +88,16 @@ Add the particle rules from https://docs.particle.io/assets/files/50-particle.ru
 
 > sudo cp 50-particle.rules /etc/udev/rules.d/
 
+#### errors
+- 'bytecode stream generated with LTO version 4.0 instead of the expected 3.0'
+  - the firmware was built with different gcc than is being used to compile the app
+  - ran into this switching between 4.9 and 5.3
+
+
+### downloads
+- [gcc arm 4.9](https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2)
+- [gcc arm 5.3](https://developer.arm.com/-/media/Files/downloads/gnu-rm/5_3-2016q1/gccarmnoneeabi532016q120160330linuxtar.bz2)
+
 ### udev rules
 
 - https://gist.github.com/monkbroc/b283bb4da8c10228a61e
