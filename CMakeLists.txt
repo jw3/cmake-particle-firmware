@@ -10,6 +10,10 @@ set(BUILD_DIR ${CMAKE_BINARY_DIR})
 set(GCC_ARM_PATH /usr/local/gcc-arm/bin/)
 set(FIRMWARE_DIR /usr/local/src/particle/firmware)
 
+if (NOT FIRMWARE_VERSION)
+    message(FATAL_ERROR "Firmware version was not specified with FIRMWARE_VERSION")
+endif ()
+
 if (NOT PLATFORM)
     message(WARNING "defaulting to photon platform, specify with PLATFORM")
     set(PLATFORM photon)
