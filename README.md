@@ -92,6 +92,12 @@ Add the particle rules from https://docs.particle.io/assets/files/50-particle.ru
 - 'bytecode stream generated with LTO version 4.0 instead of the expected 3.0'
   - the firmware was built with different gcc than is being used to compile the app
   - ran into this switching between 4.9 and 5.3
+- firmware 0.7.0
+  - `MODULE_FUNCTION" is not defined`
+  - https://github.com/particle-iot/firmware/issues/1368
+- 'build.mk:65: *** "No sources found in /tmp/.mount_jetbraUvOxBx/".  Stop.'
+  - when compiling firmware 0.7.0 from clion console
+  - use a non-clion console and builds fine
 
 #### using elsewhere
 
