@@ -49,7 +49,7 @@ function(add_particle_remote_app name)
                        COMMAND make
                        ARGS ${MAKE_ARGS}
                        DEPENDS ${SOURCE_FILES}
-                       WORKING_DIRECTORY ${FIRMWARE_DIR}
+                       WORKING_DIRECTORY ${FIRMWARE_DIR}/main
                        COMMENT "Compile [${name}] as a Remote User Module for the ${PLATFORM} platform.")
 
     configure_file(${CMAKE_SOURCE_DIR}/common/flash.mk.in ${CMAKE_BINARY_DIR}/${name}/flash.mk)
