@@ -1,0 +1,12 @@
+[requires]
+  particle-common/0.1.0@jw3/stable
+  OneWire/0.1.0@jw3/stable
+  DS18B20/0.1.0@jw3/stable
+  TinyGpsPlus/0.1.0@jw3/stable
+  LiquidCrystalI2C/0.1.0@jw3/stable
+  AssetTrackerRK/0.1.0@jw3/stable
+  LIS3DH/0.1.0@jw3/stable
+  NeoGPS/0.1.0@jw3/stable
+
+[generators]
+  cmake
