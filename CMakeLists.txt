@@ -7,8 +7,14 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 set(BUILD_DIR ${CMAKE_BINARY_DIR})
-set(GCC_ARM_PATH /usr/local/gcc-arm/bin/)
-set(FIRMWARE_DIR /usr/local/src/particle/firmware)
+
+if (NOT GCC_ARM_PATH)
+    set(GCC_ARM_PATH /usr/local/gcc-arm/bin/)
+endif ()
+
+if (NOT FIRMWARE_DIR)
+    set(FIRMWARE_DIR /usr/local/src/particle/firmware)
+endif ()
 
 if (NOT FIRMWARE_VERSION)
     message(FATAL_ERROR "Firmware version was not specified with FIRMWARE_VERSION")
