@@ -3,6 +3,8 @@ Using CMake with Particle
 
 Proof of concept Particle firmware build using CMake.
 
+Active development based on CMake and the [Conan package manager](https://conan.io/) over in https://github.com/jw3/conan-particle
+
 ### goals
 
 - Use CMake to build firmware
